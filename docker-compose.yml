@@ -1,0 +1,34 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db  # Add this line to persist data
+
+  question-service:
+    build: ./question-microservice
+    container_name: question-service
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    environment:
+      - PORT=5000
+      - MONGO_URI=mongodb://mongo:27017/questionsDB
+
+  submit-service:
+    build: ./submit-microservice
+    container_name: submit-service
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mongo
+    environment:
+      - PORT=5001
+      - MONGO_URI=mongodb://mongo:27017/questionsDB
+
+volumes:
+  mongo-data:
