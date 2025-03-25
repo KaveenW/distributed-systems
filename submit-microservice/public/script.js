@@ -4,7 +4,7 @@ async function submitQuestion() {
     const answer2 = document.getElementById('answer2').value;
     const answer3 = document.getElementById('answer3').value;
     const answer4 = document.getElementById('answer4').value;
-    
+
     const answers = [
         { text: answer1, isCorrect: false },
         { text: answer2, isCorrect: false },

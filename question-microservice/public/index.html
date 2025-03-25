@@ -4,13 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz App</title>
+    <link rel="stylesheet" href="styles.css">
     <script defer src="script.js"></script>
 </head>
 <body>
-    <h1>Quiz App</h1>
-    <label for="category">Select Category:</label>
-    <select id="category"></select>
-    <button onclick="fetchQuestion()">Get Question</button>
-    <div id="question-area"></div>
+    <div class="container">
+        <h1>Quiz App</h1>
+
+        <div class="quiz-settings">
+            <label for="category">Select Category:</label>
+            <select id="category" class="input-field"></select>
+
+            <label for="question-count">Number of Questions:</label>
+            <input type="number" id="question-count" min="1" value="1" class="input-field">
+
+            <button class="btn" onclick="fetchQuestions()">Get Questions</button>
+        </div>
+
+        <div id="question-area" class="question-area"></div>
+    </div>
 </body>
 </html>

@@ -4,36 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit a New Question</title>
+    <link rel="stylesheet" href="styles.css">
     <script defer src="script.js"></script>
 </head>
 <body>
-    <h1>Submit a New Question</h1>
-    <input type="text" id="question" placeholder="Enter your question" required>
-    <input type="text" id="answer1" placeholder="Answer 1" required>
-    <input type="text" id="answer2" placeholder="Answer 2" required>
-    <input type="text" id="answer3" placeholder="Answer 3" required>
-    <input type="text" id="answer4" placeholder="Answer 4" required>
-    
-    <select id="isCorrect">
-        <option value="0">Answer 1</option>
-        <option value="1">Answer 2</option>
-        <option value="2">Answer 3</option>
-        <option value="3">Answer 4</option>
-    </select>
-    
-    <label for="category">Select Category:</label>
-    <select id="category" required>
-        <option value="">Select a category</option>
-        <option value="General Knowledge">General Knowledge</option>
-        <option value="Science">Science</option>
-        <option value="Math">Math</option>
-        <option value="History">History</option>
-        <option value="Sports">Sports</option>
-        <!-- Add more predefined categories here -->
-    </select>
-    
-    <input type="text" id="newCategory" placeholder="Enter new category (optional)">
+    <div class="container">
+        <h1>Submit a New Question</h1>
 
-    <button onclick="submitQuestion()">Submit</button>
+        <div class="question-form">
+            <input type="text" id="question" placeholder="Enter your question" required class="input-field full-width">
+
+            <div class="answer-group">
+                <input type="text" id="answer1" placeholder="Answer 1" required class="input-field">
+                <input type="text" id="answer2" placeholder="Answer 2" required class="input-field">
+            </div>
+
+            <div class="answer-group">
+                <input type="text" id="answer3" placeholder="Answer 3" required class="input-field">
+                <input type="text" id="answer4" placeholder="Answer 4" required class="input-field">
+            </div>
+
+            <div class="selection-group">
+                <div class="select-correct">
+                    <label for="isCorrect">Select Correct Answer:</label>
+                    <select id="isCorrect" class="input-field">
+                        <option value="0">Answer 1</option>
+                        <option value="1">Answer 2</option>
+                        <option value="2">Answer 3</option>
+                        <option value="3">Answer 4</option>
+                    </select>
+                </div>
+
+                <div class="select-category">
+                    <label for="category">Select Category:</label>
+                    <select id="category" required class="input-field">
+                        <option value="">Select a category</option>
+                        <option value="General Knowledge">General Knowledge</option>
+                        <option value="Science">Science</option>
+                        <option value="Math">Math</option>
+                        <option value="History">History</option>
+                        <option value="Sports">Sports</option>
+                        <!-- Add more predefined categories here -->
+                    </select>
+                    <input type="text" id="newCategory" placeholder="Enter new category (optional)" class="input-field">
+                </div>
+            </div>
+
+            <button class="btn" onclick="submitQuestion()">Submit</button>
+        </div>
+    </div>
 </body>
 </html>
