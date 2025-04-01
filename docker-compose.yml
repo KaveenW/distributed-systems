@@ -3,28 +3,69 @@ services:
     image: mongo
     container_name: mongo
     ports:
-      - "27017:27017"
+      - "4002:27017"
     volumes:
-      - mongo-data:/data/db
+      - db_vol:/data/db
+    networks:
+      - app-network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"  # Messaging port
+      - "15672:15672"  # Management console
+    networks:
+      - app-network
+
   question-service:
     build: ./question-microservice
     container_name: question-service
     ports:
-      - "4000:4000"  # Updated to match diagram
+      - "4000:4000"
     depends_on:
       - mongo
     environment:
       - PORT=4000
       - MONGO_URI=mongodb://mongo:27017/questionsDB
+    networks:
+      - app-network
+
   submit-service:
     build: ./submit-microservice
     container_name: submit-service
     ports:
-      - "4200:4200"  # Updated to match diagram
+      - "4200:4200"
     depends_on:
-      - mongo
+      - rabbitmq
+      - question-service
     environment:
       - PORT=4200
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+    volumes:
+      - categories_vol:/cache
+    networks:
+      - app-network
+
+  etl:
+    build: ./etl
+    container_name: etl
+    ports:
+      - "4001:3001"
+    depends_on:
+      - mongo
+      - rabbitmq
+    environment:
+      - PORT=3001
       - MONGO_URI=mongodb://mongo:27017/questionsDB
+      - RABBITMQ_URL=amqp://rabbitmq:5672
+    networks:
+      - app-network
+
 volumes:
-  mongo-data:
+  db_vol:
+  categories_vol:
+
+networks:
+  app-network:
+    driver: bridge

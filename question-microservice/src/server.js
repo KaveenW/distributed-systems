@@ -23,7 +23,6 @@ const connectDB = async () => {
         setTimeout(connectDB, 5000); // Retry after 5 seconds
     }
 };
-
 connectDB();
 
 // Get directory name (__dirname equivalent in ES modules)
@@ -38,5 +37,5 @@ app.use('/question', questionRoutes);
 app.use('/categories', categoryRoutes);
 
 // Start server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000; // Updated to 4000 per the diagram
 app.listen(PORT, () => console.log(`Question service running on port ${PORT}`));
